@@ -23,6 +23,7 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     context.read<CurrentWeatherCubit>().loadInitialWeather('Alexandria');
+    context.read<CurrentWeatherCubit>().loadSavedLocations();
   }
 
   @override
