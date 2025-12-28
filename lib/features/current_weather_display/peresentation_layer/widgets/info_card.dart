@@ -21,7 +21,7 @@ class InfoCard extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: const Color(0xFF1E2832),
+        color: Theme.of(context).cardColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -31,21 +31,12 @@ class InfoCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             title.toUpperCase(),
-            style: TextStyle(
-              color: ColorsApp.backgroundLight,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 20),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Color.fromARGB(255, 179, 180, 182),
-            ),
-          ),
+          Text(value, style: Theme.of(context).textTheme.bodySmall),
           if (subtitle != null)
-            Text(subtitle!, style: const TextStyle(fontSize: 10)),
+            Text(subtitle!, style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
     );

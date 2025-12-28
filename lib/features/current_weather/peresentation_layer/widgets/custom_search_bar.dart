@@ -13,11 +13,11 @@ class CustomSearchBar extends StatelessWidget {
 
       decoration: InputDecoration(
         hintText: 'Find city or airport',
-        hintStyle: TextStyle(color: Colors.grey),
+        hintStyle: Theme.of(context).textTheme.bodySmall,
 
         prefixIcon: const Icon(Icons.search, color: Colors.grey),
         filled: true,
-        fillColor: const Color(0xFF1e2832),
+        fillColor: Theme.of(context).cardColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

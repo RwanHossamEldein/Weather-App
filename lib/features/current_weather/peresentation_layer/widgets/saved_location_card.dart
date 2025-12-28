@@ -21,7 +21,7 @@ class SavedLocationCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 4),
         constraints: const BoxConstraints(minHeight: 80),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E2832),
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Padding(
@@ -35,11 +35,7 @@ class SavedLocationCard extends StatelessWidget {
                   children: [
                     Text(
                       weather.location.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineMedium,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
@@ -65,22 +61,14 @@ class SavedLocationCard extends StatelessWidget {
                       const SizedBox(width: 10),
                       Text(
                         '${weather.current.tempC.round()}°',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.w300,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
                   Text(
                     weather.current.condition.text,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w300,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
               ),

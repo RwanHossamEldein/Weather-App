@@ -6,6 +6,7 @@ import 'package:weather_app/features/current_weather/peresentation_layer/cubit/c
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_add_to_saved_button.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_current_location_card.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_search_bar.dart';
+import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_side_drawer.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/saved_location_card.dart';
 
 class Screen extends StatefulWidget {
@@ -27,7 +28,9 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.backgroundDark,
+      endDrawer: CustomSideDrawer(),
+
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
@@ -55,16 +58,15 @@ class _ScreenState extends State<Screen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Locations',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+
                           child: Text(
                             'Edit',
                             style: TextStyle(color: ColorsApp.primaryColor),

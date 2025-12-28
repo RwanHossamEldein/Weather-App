@@ -31,3 +31,8 @@ class CurrentWeatherError extends CurrentWeatherState {
   @override
   List<Object?> get props => [message];
 }
+
+class ThemeModeState {
+  final bool isDark;
+  ThemeModeState({required this.isDark});
+}

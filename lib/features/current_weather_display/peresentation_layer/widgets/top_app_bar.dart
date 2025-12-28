@@ -10,14 +10,14 @@ class TopAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 50, right: 16, left: 16, bottom: 8),
+      padding: const EdgeInsets.only(top: 70, right: 16, left: 16, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
-              color: ColorsApp.backgroundLight,
+              color: Theme.of(context).iconTheme.color,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -28,11 +28,7 @@ class TopAppBar extends StatelessWidget {
               Center(
                 child: Text(
                   city.location.name,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: ColorsApp.backgroundLight,
-                  ),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
               ),
               const SizedBox(height: 4),
@@ -48,9 +44,7 @@ class TopAppBar extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 'Live Updates',
-                style: Theme.of(
-                  context,
-                ).textTheme.labelSmall?.copyWith(color: Colors.grey),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),

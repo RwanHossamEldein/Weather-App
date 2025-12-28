@@ -17,7 +17,7 @@ class ForecastItem extends StatelessWidget {
           SizedBox(
             width: 60,
             child: Text(
-              style: TextStyle(color: ColorsApp.backgroundLight),
+              style: Theme.of(context).textTheme.bodySmall,
               DateFormat('EEEE').format(DateTime.parse(forecastDay.date)),
             ),
           ),
@@ -31,10 +31,7 @@ class ForecastItem extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             "${forecastDay.day.maxtempC.round()}°",
-            style: TextStyle(
-              color: ColorsApp.backgroundLight,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(width: 4),
           Text(

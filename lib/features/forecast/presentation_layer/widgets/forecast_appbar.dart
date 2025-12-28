@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/colors_app.dart';
 
+// ignore: must_be_immutable
 class ForecastAppBar extends StatelessWidget {
   const ForecastAppBar({super.key});
 
@@ -11,22 +12,18 @@ class ForecastAppBar extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
-              color: ColorsApp.backgroundLight,
+              color: Theme.of(context).iconTheme.color,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
             },
           ),
           const Spacer(),
           Text(
             "3-Day Forecast",
-            style: TextStyle(
-              color: ColorsApp.backgroundLight,
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const Spacer(),
         ],

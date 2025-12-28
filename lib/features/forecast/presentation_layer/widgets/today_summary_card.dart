@@ -10,7 +10,7 @@ class TodaySummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color(0xFF1E2832),
+      color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -20,17 +20,9 @@ class TodaySummaryCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text("Right Now", style: Theme.of(context).textTheme.bodySmall),
                 Text(
-                  "Right Now",
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 177, 175, 175),
-                  ),
-                ),
-                Text(
-                  style: TextStyle(
-                    color: ColorsApp.backgroundLight,
-                    fontSize: 20,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge,
                   "${city.current.tempC.round()}°",
                 ),
                 Text(
@@ -48,9 +40,7 @@ class TodaySummaryCard extends StatelessWidget {
                 ),
 
                 Text(
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 177, 175, 175),
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
                   "H:${city.forecast.forecastday[0].day.maxtempC.round()}° L:${city.forecast.forecastday[0].day.mintempC.round()}°",
                 ),
               ],

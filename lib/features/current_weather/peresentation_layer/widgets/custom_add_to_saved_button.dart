@@ -50,15 +50,7 @@ class CustomAddToSavedButton extends StatelessWidget {
                 },
               );
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1E293B),
-              foregroundColor: const Color(0xFFE2E8F0),
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(9999),
-              ),
-            ),
+            style: Theme.of(context).elevatedButtonTheme.style,
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [

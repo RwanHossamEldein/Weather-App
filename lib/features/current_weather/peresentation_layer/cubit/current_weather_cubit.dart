@@ -7,7 +7,7 @@ class CurrentWeatherCubit extends Cubit<CurrentWeatherState> {
   final CurrentRepo repo;
   Model? _currentMainWeather;
   final List<Model> _savedLocationsList = [];
-
+  final bool isDark = true;
   CurrentWeatherCubit(this.repo) : super(CurrentWeatherInitial());
 
   Future<void> loadInitialWeather(String city) async {
