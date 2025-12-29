@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/colors_app.dart';
 import 'package:weather_app/features/current_weather/data_layer/model.dart';
 import 'package:weather_app/features/forecast/presentation_layer/widgets/forecast_appbar.dart';
 import 'package:weather_app/features/forecast/presentation_layer/widgets/forecast_list.dart';
 import 'package:weather_app/features/forecast/presentation_layer/widgets/location_section.dart';
 import 'package:weather_app/features/forecast/presentation_layer/widgets/today_summary_card.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class WeeklyForcast extends StatelessWidget {
@@ -28,7 +28,7 @@ class WeeklyForcast extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'This Week',
+                  AppLocalizations.of(context)!.thisWeek,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],

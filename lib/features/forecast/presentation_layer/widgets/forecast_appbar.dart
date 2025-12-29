@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/colors_app.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class ForecastAppBar extends StatelessWidget {
@@ -21,8 +21,9 @@ class ForecastAppBar extends StatelessWidget {
             },
           ),
           const Spacer(),
+          //
           Text(
-            "3-Day Forecast",
+            AppLocalizations.of(context)!.threeDayForecast,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const Spacer(),

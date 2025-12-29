@@ -4,6 +4,7 @@ import 'package:weather_app/features/current_weather/data_layer/model.dart';
 import 'package:weather_app/features/current_weather_display/peresentation_layer/widgets/HourlyItem.dart';
 import 'package:weather_app/features/current_weather_display/peresentation_layer/widgets/info_card.dart';
 import 'package:weather_app/features/current_weather_display/peresentation_layer/widgets/top_app_bar.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class CurrentWeatherDisplayScreen extends StatelessWidget {
@@ -57,23 +58,23 @@ class CurrentWeatherDisplayScreen extends StatelessWidget {
               children: [
                 InfoCard(
                   icon: Icons.air,
-                  title: 'Wind',
+                  title: AppLocalizations.of(context)!.wind,
                   value: '${city.current.windKph} kph',
                 ),
                 InfoCard(
                   icon: Icons.water_drop,
-                  title: 'Humidity',
+                  title: AppLocalizations.of(context)!.humidity,
                   value: '${city.current.humidity}%',
                 ),
                 InfoCard(
                   icon: Icons.cloud,
-                  title: 'Rain',
+                  title: AppLocalizations.of(context)!.rain,
                   value:
                       '${city.forecast.forecastday[0].day.dailyChanceOfRain}%',
                 ),
                 InfoCard(
                   icon: Icons.sunny,
-                  title: 'UV INDEX',
+                  title: AppLocalizations.of(context)!.uvIndex,
                   value: city.current.uv.toString(),
                 ),
               ],

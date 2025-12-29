@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/cubit/current_weather_cubit.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 class CustomAddToSavedButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -19,11 +20,11 @@ class CustomAddToSavedButton extends StatelessWidget {
                 builder: (_) {
                   final controller = TextEditingController();
                   return AlertDialog(
-                    title: const Text('Add Location'),
+                    title: Text(AppLocalizations.of(context)!.addLocationTitle),
                     content: TextField(
                       controller: controller,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter city name',
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.searchHint,
                       ),
                     ),
                     actions: [
@@ -37,13 +38,15 @@ class CustomAddToSavedButton extends StatelessWidget {
                             Navigator.pop(context);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Please enter a city name'),
+                              SnackBar(
+                                content: Text(
+                                  AppLocalizations.of(context)!.pleaseEnterCity,
+                                ),
                               ),
                             );
                           }
                         },
-                        child: const Text('Add'),
+                        child: Text(AppLocalizations.of(context)!.add),
                       ),
                     ],
                   );
@@ -51,13 +54,13 @@ class CustomAddToSavedButton extends StatelessWidget {
               );
             },
             style: Theme.of(context).elevatedButtonTheme.style,
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.add_circle_outline, size: 20),
                 SizedBox(width: 8),
                 Text(
-                  'Add New Location',
+                  AppLocalizations.of(context)!.addNewLocation,
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
               ],

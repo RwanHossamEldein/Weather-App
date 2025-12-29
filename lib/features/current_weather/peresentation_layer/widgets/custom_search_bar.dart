@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/colors_app.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key, required this.controller});
@@ -12,7 +13,7 @@ class CustomSearchBar extends StatelessWidget {
       controller: controller,
 
       decoration: InputDecoration(
-        hintText: 'Find city or airport',
+        hintText: AppLocalizations.of(context)!.findCityOrAirport,
         hintStyle: Theme.of(context).textTheme.bodySmall,
 
         prefixIcon: const Icon(Icons.search, color: Colors.grey),

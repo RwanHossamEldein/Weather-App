@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/colors_app.dart';
 import 'package:weather_app/features/current_weather/data_layer/model.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class TodaySummaryCard extends StatelessWidget {
@@ -20,7 +21,10 @@ class TodaySummaryCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Right Now", style: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  AppLocalizations.of(context)!.rightNow,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 Text(
                   style: Theme.of(context).textTheme.bodyLarge,
                   "${city.current.tempC.round()}°",

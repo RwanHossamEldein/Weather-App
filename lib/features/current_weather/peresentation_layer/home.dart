@@ -8,6 +8,7 @@ import 'package:weather_app/features/current_weather/peresentation_layer/widgets
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_search_bar.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_side_drawer.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/saved_location_card.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 class Screen extends StatefulWidget {
   const Screen({super.key});
@@ -60,7 +61,7 @@ class _ScreenState extends State<Screen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Locations',
+                          AppLocalizations.of(context)!.locations,
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         TextButton(
@@ -69,7 +70,7 @@ class _ScreenState extends State<Screen> {
                           },
 
                           child: Text(
-                            'Edit',
+                            AppLocalizations.of(context)!.edit,
                             style: TextStyle(color: ColorsApp.primaryColor),
                           ),
                         ),
@@ -90,8 +91,8 @@ class _ScreenState extends State<Screen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // Current
-                            const Text(
-                              'Current',
+                            Text(
+                              AppLocalizations.of(context)!.current,
                               style: TextStyle(
                                 color: Color.fromARGB(255, 141, 172, 187),
                               ),
@@ -105,8 +106,8 @@ class _ScreenState extends State<Screen> {
                             const SizedBox(height: 24),
 
                             // Saved
-                            const Text(
-                              'SAVED LOCATIONS',
+                            Text(
+                              AppLocalizations.of(context)!.savedLocations,
                               style: TextStyle(
                                 color: Color.fromARGB(255, 141, 172, 187),
                               ),
@@ -150,9 +151,9 @@ class _ScreenState extends State<Screen> {
                 );
               }
 
-              return const Center(
+              return Center(
                 child: Text(
-                  'Search for a city to start',
+                  AppLocalizations.of(context)!.searchHint,
                   style: TextStyle(color: Colors.grey),
                 ),
               );

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/colors_app.dart';
 import 'package:weather_app/features/Themes/themes_cubit.dart';
 import 'package:weather_app/features/Themes/themes_state.dart';
+import 'package:weather_app/features/localization/localization_cubit.dart';
+import 'package:weather_app/l10n/app_localizations.dart';
 
 class CustomSideDrawer extends StatelessWidget {
   const CustomSideDrawer({super.key});
@@ -20,7 +22,7 @@ class CustomSideDrawer extends StatelessWidget {
                 DrawerHeader(
                   decoration: BoxDecoration(color: ColorsApp.primaryColor),
                   child: Text(
-                    'Settings',
+                    AppLocalizations.of(context)!.settings,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
@@ -30,10 +32,64 @@ class CustomSideDrawer extends StatelessWidget {
                     color: state.isDark ? Colors.white : Colors.black,
                   ),
                   title: Text(
-                    'Language',
+                    AppLocalizations.of(context)!.language,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    final currentLang = context
+                        .read<LocalizationCubit>()
+                        .state
+                        .language;
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        String selectedLang = currentLang;
+                        return AlertDialog(
+                          title: Text(AppLocalizations.of(context)!.language),
+                          content: StatefulBuilder(
+                            builder: (context, setState) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  RadioListTile<String>(
+                                    title: Text('English'),
+                                    value: 'en',
+                                    groupValue: selectedLang,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedLang = value!;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile<String>(
+                                    title: Text('العربية'),
+                                    value: 'ar',
+                                    groupValue: selectedLang,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedLang = value!;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                context
+                                    .read<LocalizationCubit>()
+                                    .toggleLanguage();
+                                Navigator.pop(context);
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
                 ListTile(
                   leading: Icon(
@@ -41,7 +97,9 @@ class CustomSideDrawer extends StatelessWidget {
                     color: state.isDark ? Colors.white : Colors.black,
                   ),
                   title: Text(
-                    state.isDark ? 'Dark Mode' : 'Light Mode',
+                    state.isDark
+                        ? AppLocalizations.of(context)!.darkMode
+                        : AppLocalizations.of(context)!.lightMode,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   onTap: () {
