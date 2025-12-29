@@ -1,16 +1,23 @@
 # weather_app
 
-A new Flutter project.
+A Flutter weather application with localization, theme switching, and clean architecture.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
+-  Multi-language support (English / Arabic)
+-  Light & Dark mode
+-  Add and manage locations
+-  Current weather & forecast
+-  State management using Cubit (Bloc)
+-  Save user preferences with SharedPreferences
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tech Stack
+- Flutter
+- Dart
+- Google Stitch (UI/UX Design)
+- Cubit (flutter_bloc)
+- REST API
+- SharedPreferences
+- Localization (flutter gen-l10n)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
