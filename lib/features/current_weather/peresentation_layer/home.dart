@@ -5,9 +5,10 @@ import 'package:weather_app/features/current_weather/peresentation_layer/cubit/c
 import 'package:weather_app/features/current_weather/peresentation_layer/cubit/current_weather_state.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_add_to_saved_button.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_current_location_card.dart';
-import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_search_bar.dart';
+import 'package:weather_app/features/search/custom_search_bar.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/custom_side_drawer.dart';
 import 'package:weather_app/features/current_weather/peresentation_layer/widgets/saved_location_card.dart';
+import 'package:weather_app/features/forecast/presentation_layer/screens/weekly_forcast.dart';
 import 'package:weather_app/l10n/app_localizations.dart';
 
 class Screen extends StatefulWidget {
@@ -30,29 +31,24 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: CustomSideDrawer(),
-
+      endDrawer: const CustomSideDrawer(),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: BlocBuilder<CurrentWeatherCubit, CurrentWeatherState>(
             builder: (context, state) {
               if (state is CurrentWeatherLoading) {
                 return const Center(child: CircularProgressIndicator());
-              }
-
-              if (state is CurrentWeatherError) {
+              } else if (state is CurrentWeatherError) {
                 return Center(
                   child: Text(
                     state.message,
                     style: const TextStyle(color: Colors.red),
                   ),
                 );
-              }
-
-              if (state is CurrentWeatherLoaded) {
+              } else if (state is CurrentWeatherLoaded) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +64,6 @@ class _ScreenState extends State<Screen> {
                           onPressed: () {
                             Scaffold.of(context).openEndDrawer();
                           },
-
                           child: Text(
                             AppLocalizations.of(context)!.edit,
                             style: TextStyle(color: ColorsApp.primaryColor),
@@ -76,63 +71,72 @@ class _ScreenState extends State<Screen> {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 10),
-
-                    // Search Bar
-                    CustomSearchBar(controller: _searchController),
-
+                    // Search bar
+                    CustomSearchBar(
+                      controller: _searchController,
+                      onCitySelected: (cityName) async {
+                        try {
+                          final weather = await context
+                              .read<CurrentWeatherCubit>()
+                              .repo
+                              .getCurrentWeather(cityName);
+                          if (context.mounted) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    WeeklyForcast(city: weather),
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Failed to load weather for $cityName: $e',
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                    ),
                     const SizedBox(height: 20),
-
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Current
-                            Text(
-                              AppLocalizations.of(context)!.current,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 141, 172, 187),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-
-                            CustomCurrentLocationCard(
-                              weather: state.currentWeather,
-                            ),
-
-                            const SizedBox(height: 24),
-
-                            // Saved
-                            Text(
-                              AppLocalizations.of(context)!.savedLocations,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 141, 172, 187),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.savedLocations.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 12),
-                                  child: SavedLocationCard(
-                                    weather: state.savedLocations[index],
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                    // Current location
+                    Text(
+                      AppLocalizations.of(context)!.current,
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 141, 172, 187),
                       ),
                     ),
-
-                    // Add Button
+                    const SizedBox(height: 10),
+                    CustomCurrentLocationCard(weather: state.currentWeather),
+                    const SizedBox(height: 24),
+                    // Saved locations
+                    Text(
+                      AppLocalizations.of(context)!.savedLocations,
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 141, 172, 187),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.savedLocations.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: SavedLocationCard(
+                            weather: state.savedLocations[index],
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    // Add button
                     Center(
                       child: CustomAddToSavedButton(
                         onPressed: () {
@@ -150,11 +154,10 @@ class _ScreenState extends State<Screen> {
                   ],
                 );
               }
-
               return Center(
                 child: Text(
                   AppLocalizations.of(context)!.searchHint,
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
               );
             },

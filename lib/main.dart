@@ -10,6 +10,9 @@ import 'package:weather_app/features/current_weather/peresentation_layer/home.da
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weather_app/features/localization/localization_cubit.dart';
 import 'package:weather_app/features/localization/localization_state.dart';
+import 'package:weather_app/features/search/data_layer/data_source/search_data_source.dart';
+import 'package:weather_app/features/search/data_layer/repo/search_repo.dart';
+import 'package:weather_app/features/search/peresentation_layer/state_management/search_cubit.dart';
 import 'package:weather_app/l10n/app_localizations.dart';
 
 void main() {
@@ -22,7 +25,13 @@ void main() {
         ),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => LocalizationCubit()),
+        BlocProvider(
+          create: (context) => SearchCubit(
+            searchRepo: SearchRepoImp(SearchRemoteDataSourceImp()),
+          ),
+        ),
       ],
+
       child: MyApp(),
     ),
   );
